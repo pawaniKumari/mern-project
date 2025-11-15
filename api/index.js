@@ -5,8 +5,10 @@ import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
 import postRoutes from "./routes/post.route.js";
 import commentRoutes from "./routes/comment.route.js";
+import chatRoutes from "./routes/chat.route.js";
 import cookieParser from "cookie-parser";
 import path from "path";
+import cors from "cors";
 
 const __dirname = path.resolve();
 
@@ -28,17 +30,29 @@ mongoose
 
 const app = express();
 
+const PORT = process.env.PORT || 3000;
+const CLIENT_PORT = process.env.CLIENT_PORT || 5173;
+
+app.use(
+  cors({
+    origin: `http://localhost:${CLIENT_PORT}`,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use(cookieParser());
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000!");
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}!`);
 });
 
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/comment", commentRoutes);
+app.use("/api/chat", chatRoutes);
 
 app.use(express.static(path.join(__dirname, "/client/dist")));
 

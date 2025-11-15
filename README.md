@@ -47,8 +47,12 @@ mern-project/
    ```
 3. Create a `.env` file inside api directory and configure the following variables:
    ```env
+
+   PORT=your_backend_port
+   CLIENT_PORT=your_frontend_port
    MONGO_URI=your_mongodb_connection_string
    JWT_SECRET=your_jwt_secret
+   GEMINI_API_KEY=your_gemini_key
    ```
 4. Start the backend server:
    ```bash
@@ -76,6 +80,8 @@ mern-project/
 The Firebase configuration values are stored in a `.env` file in the `client` directory to ensure sensitive information is not exposed in the codebase. The following variables need to be defined in the `.env` file:
 
 ```
+VITE_API_BASE_URL=http://localhost:your_backend_port
+VITE_CLIENT_PORT=your_client_port
 VITE_FIREBASE_API_KEY=your_firebase_api_key
 VITE_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
 VITE_FIREBASE_PROJECT_ID=your_firebase_project_id
